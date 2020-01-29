@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-01-27T07:58:08.239Z</updated>
+  <updated>2020-01-28T04:37:14.950Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://blog.cabbage329.com/2020/01/27/a/"/>
     <id>http://blog.cabbage329.com/2020/01/27/a/</id>
     <published>2020-01-27T07:54:19.000Z</published>
-    <updated>2020-01-27T07:58:08.239Z</updated>
+    <updated>2020-01-28T04:37:14.950Z</updated>
     
     <summary type="html">
     
@@ -30,12 +30,14 @@
         
         
           &lt;h1 id=&quot;苹果推送校验证书&quot;&gt;&lt;a href=&quot;#苹果推送校验证书&quot; class=&quot;headerlink&quot; title=&quot;苹果推送校验证书&quot;&gt;&lt;/a&gt;苹果推送校验证书&lt;/h1&gt;&lt;p&gt;记录一个推送时遇到的坑&lt;/p&gt;
-&lt;pre class=&quot;
+&lt;h2 id=&quot;证书基本检查&quot;&gt;&lt;a
         
       
     
     </summary>
     
+    
+      <category term="java" scheme="http://blog.cabbage329.com/categories/java/"/>
     
     
       <category term="apns" scheme="http://blog.cabbage329.com/tags/apns/"/>
