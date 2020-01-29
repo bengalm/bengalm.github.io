@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-01-29T06:34:25.693Z</updated>
+  <updated>2020-01-29T11:15:50.992Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx自定义错误返回</title>
+    <link href="http://blog.cabbage329.com/2020/01/29/nginx-custom-error-response/"/>
+    <id>http://blog.cabbage329.com/2020/01/29/nginx-custom-error-response/</id>
+    <published>2020-01-29T11:12:17.000Z</published>
+    <updated>2020-01-29T11:15:50.992Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;nginx 错误页面我想返回json数据&lt;/p&gt;
+&lt;h2 id=&quot;修改配置文件&quot;&gt;&lt;a href=&quot;#修改配置文件&quot; class=&quot;headerlink&quot; title=&quot;修改配置文件&quot;&gt;&lt;/a&gt;修改配置文件&lt;/h2&gt;&lt;h3 id=&quot;添加错误状态码处理&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="nginx" scheme="http://blog.cabbage329.com/categories/nginx/"/>
+    
+    
+      <category term="nginx" scheme="http://blog.cabbage329.com/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>java线程池取消指定任务</title>

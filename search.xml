@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>nginx自定义错误返回</title>
+      <link href="/2020/01/29/nginx-custom-error-response/"/>
+      <url>/2020/01/29/nginx-custom-error-response/</url>
+      
+        <content type="html"><![CDATA[<p>nginx 错误页面我想返回json数据</p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="添加错误状态码处理"><a href="#添加错误状态码处理" class="headerlink" title="添加错误状态码处理"></a>添加错误状态码处理</h3><pre><code>error_page 404 =200 @404_json;</code></pre><p>404 处理的错误状态码</p><p>=200 修改返回状态码</p><p>@404_json 对应的处理</p><h3 id="添加对应处理"><a href="#添加对应处理" class="headerlink" title="添加对应处理"></a>添加对应处理</h3><pre><code>location @404_json {    default_type application/json;    return 404 '{ "response": { "status": "EXCEPTION_404_NOT_FOUND",}, "message": "Not Found"}';}</code></pre><p>return 404 xxx (这个404 修改不起作用需要修改返回状态码看上一步)</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>java线程池取消指定任务</title>
       <link href="/2020/01/29/task-java-cancel/"/>
       <url>/2020/01/29/task-java-cancel/</url>
