@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-01-29T11:15:50.992Z</updated>
+  <updated>2020-01-30T12:38:16.396Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>springboot程序部署到docker</title>
+    <link href="http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/"/>
+    <id>http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/</id>
+    <published>2020-01-30T12:35:02.000Z</published>
+    <updated>2020-01-30T12:38:16.396Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-docker开启远程访问接口&quot;&gt;&lt;a href=&quot;#1-docker开启远程访问接口&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://blog.cabbage329.com/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="http://blog.cabbage329.com/tags/docker/"/>
+    
+      <category term="springboot" scheme="http://blog.cabbage329.com/tags/springboot/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx自定义错误返回</title>
