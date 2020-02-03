@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-01-30T12:38:16.396Z</updated>
+  <updated>2020-02-03T11:01:36.000Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mybatis audit</title>
+    <link href="http://blog.cabbage329.com/2020/02/03/mybatis-audit/"/>
+    <id>http://blog.cabbage329.com/2020/02/03/mybatis-audit/</id>
+    <published>2020-02-03T10:48:35.000Z</published>
+    <updated>2020-02-03T11:01:36.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;mybatis 实现审计功能&lt;/p&gt;
+&lt;h2 id=&quot;1-注解&quot;&gt;&lt;a href=&quot;#1-注解&quot; class=&quot;headerlink&quot; title=&quot;1.注解&quot;&gt;&lt;/a&gt;1.注解&lt;/h2&gt;&lt;h3 id=&quot;①可以使用spirng-data-commons&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://blog.cabbage329.com/categories/java/"/>
+    
+    
+      <category term="mybatis" scheme="http://blog.cabbage329.com/tags/mybatis/"/>
+    
+      <category term="java" scheme="http://blog.cabbage329.com/tags/java/"/>
+    
+  </entry>
   
   <entry>
     <title>springboot程序部署到docker</title>

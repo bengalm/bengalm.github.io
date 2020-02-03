@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="springboot程序部署到docker, cabbage">
-    <meta name="description" content="springboot程序部署到docker">
+    <meta name="keywords" content="mybatis audit, cabbage">
+    <meta name="description" content="mybatis审计功能实现">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>springboot程序部署到docker | cabbage</title>
+    <title>mybatis audit | cabbage</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,12 +241,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">springboot程序部署到docker</h1>
+                    <h1 class="description center-align post-title">mybatis audit</h1>
                 </div>
             </div>
         </div>
@@ -363,12 +363,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
+                            <a href="/tags/mybatis/">
+                                <span class="chip bg-color">mybatis</span>
                             </a>
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -379,8 +379,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/docker/" class="post-category">
-                                docker
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
                     </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-30
+                    2020-02-03
                 </div>
                 
 
@@ -414,46 +414,110 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-docker开启远程访问接口"><a href="#1-docker开启远程访问接口" class="headerlink" title="1.docker开启远程访问接口"></a>1.docker开启远程访问接口</h2><ol>
-<li>在<code>/etc/docker</code>创建 <code>daemon.json</code> 文件:<pre><code>{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}</code></pre></li>
-<li>重启docker:<pre><code>systemctl restart docker        </code></pre></li>
-</ol>
-<h2 id="2-Spring-Boot-项目添加Docker支持"><a href="#2-Spring-Boot-项目添加Docker支持" class="headerlink" title="2.Spring Boot 项目添加Docker支持"></a>2.Spring Boot 项目添加Docker支持</h2><ol>
-<li>在<code>/src/main/docker</code>创建<code>Dockerfile</code>文件:<pre><code>FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ADD demo-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</code></pre>这个 Dockerfile 文件很简单，构建 Jdk 基础环境，添加 Spring Boot Jar 到镜像中，简单解释一下:<ul>
-<li>FROM ，表示使用 Jdk8 环境 为基础镜像，如果镜像不是本地的会从 DockerHub 进行下载</li>
-<li>VOLUME ，VOLUME 指向了一个/tmp的目录，由于 Spring Boot 使用内置的Tomcat容器，Tomcat 默认使用/tmp作为工作目录。这个命令的效果是：在宿主机的/var/lib/docker目录下创建一个临时文件并把它链接到容器中的/tmp目录</li>
-<li>ADD ，拷贝文件并且重命名</li>
-<li>ENTRYPOINT ，为了缩短 Tomcat 的启动时间，添加java.security.egd的系统属性指向/dev/urandom作为 ENTRYPOINT</li>
-</ul>
+                <p>mybatis 实现审计功能</p>
+<h2 id="1-注解"><a href="#1-注解" class="headerlink" title="1.注解"></a>1.注解</h2><h3 id="①可以使用spirng-data-commons"><a href="#①可以使用spirng-data-commons" class="headerlink" title="①可以使用spirng-data-commons"></a>①可以使用spirng-data-commons</h3><p><img src="https://i.loli.net/2020/02/03/pOlMGsTh7xFV4En.png" alt="2020-02-03_185354.png"></p>
+<h3 id="②自定义"><a href="#②自定义" class="headerlink" title="②自定义"></a>②自定义</h3><ul>
+<li>创建人<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>ANNOTATION_TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">CreatedBy</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
 </li>
-<li>修改pom.xml<br>在 pom.xml 中添加 Docker 镜像名称<pre><code>&lt;properties&gt;
-     &lt;docker.image.prefix&gt;springboot&lt;/docker.image.prefix&gt;
-&lt;/properties&gt;</code></pre>plugins 中添加 Docker 构建插件<pre><code>&lt;plugin&gt;
- &lt;groupId&gt;com.spotify&lt;/groupId&gt;
- &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;
- &lt;version&gt;1.0.0&lt;/version&gt;
- &lt;configuration&gt;
-     &lt;imageName&gt;${docker.image.prefix}/${project.artifactId}&lt;/imageName&gt;
-     &lt;dockerDirectory&gt;src/main/docker&lt;/dockerDirectory&gt;
-     &lt;dockerHost&gt;http://172.30.48.188:2375&lt;/dockerHost&gt;
-     &lt;resources&gt;
-         &lt;resource&gt;
-             &lt;targetPath&gt;/&lt;/targetPath&gt;
-             &lt;directory&gt;${project.build.directory}&lt;/directory&gt;
-             &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;
-         &lt;/resource&gt;
-     &lt;/resources&gt;
- &lt;/configuration&gt;
-&lt;/plugin&gt;</code></pre></li>
-</ol>
-<h2 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h2><ol>
-<li>打包jar<br><img src="https://i.loli.net/2020/01/30/zW9JGbXCf4MDQ52.png" alt="2020-01-30_201542.png"></li>
-<li>docker部署<br><img src="https://i.loli.net/2020/01/30/y4daQKMhSjVwmpF.png" alt="2020-01-30_201627.png"><br><img src="https://i.loli.net/2020/01/30/Jj1Apv92uGTwnOb.png" alt="2020-01-30_201727.png"></li>
-<li>查看docker image<br><img src="https://i.loli.net/2020/01/30/OsXEUuKVYP36dqb.png" alt="2020-01-30_201705.png"></li>
-</ol>
+<li>创建时间<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>ANNOTATION_TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">CreatedDate</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+<li>修改人<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>ANNOTATION_TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">LastModifiedBy</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+<li>修改时间<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>FIELD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>METHOD<span class="token punctuation">,</span> ElementType<span class="token punctuation">.</span>ANNOTATION_TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">LastModifiedDate</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span></code></pre>
+</li>
+</ul>
+<h2 id="2-审计接口"><a href="#2-审计接口" class="headerlink" title="2.审计接口"></a>2.审计接口</h2><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Intercepts</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token annotation punctuation">@Signature</span><span class="token punctuation">(</span>type <span class="token operator">=</span> Executor<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> method <span class="token operator">=</span> <span class="token string">"update"</span><span class="token punctuation">,</span> args <span class="token operator">=</span> <span class="token punctuation">{</span>MappedStatement<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> Object<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AuditingInterceptor</span> <span class="token keyword">implements</span> <span class="token class-name">Interceptor</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">intercept</span><span class="token punctuation">(</span>Invocation invocation<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+        MappedStatement mappedStatement <span class="token operator">=</span> <span class="token punctuation">(</span>MappedStatement<span class="token punctuation">)</span> invocation<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        SqlCommandType sqlCommandType <span class="token operator">=</span> mappedStatement<span class="token punctuation">.</span><span class="token function">getSqlCommandType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Object parameter <span class="token operator">=</span> invocation<span class="token punctuation">.</span><span class="token function">getArgs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> superclass <span class="token operator">=</span> parameter<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getSuperclass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Field<span class="token punctuation">[</span><span class="token punctuation">]</span> fields <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>superclass <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            fields <span class="token operator">=</span> superclass<span class="token punctuation">.</span><span class="token function">getDeclaredFields</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> invocation<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Date currentDate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        User user <span class="token operator">=</span> Optional<span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>Optional<span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span>SecurityUtils<span class="token punctuation">.</span><span class="token function">getUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElseGet</span><span class="token punctuation">(</span>UserThreadLocalRPC<span class="token operator">:</span><span class="token operator">:</span>getUser<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">orElseGet</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            User user1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            user1<span class="token punctuation">.</span><span class="token function">setUserId</span><span class="token punctuation">(</span><span class="token string">"system"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> user1<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>SqlCommandType<span class="token punctuation">.</span>UPDATE <span class="token operator">==</span> sqlCommandType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>Field field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> LastModifiedBy<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">getUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> LastModifiedDate<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> currentDate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>SqlCommandType<span class="token punctuation">.</span>INSERT <span class="token operator">==</span> sqlCommandType<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>Field field <span class="token operator">:</span> fields<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> CreatedBy<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">getUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> CreatedDate<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> currentDate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> LastModifiedBy<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> user<span class="token punctuation">.</span><span class="token function">getUserId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>AnnotationUtils<span class="token punctuation">.</span><span class="token function">getAnnotation</span><span class="token punctuation">(</span>field<span class="token punctuation">,</span> LastModifiedDate<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>parameter<span class="token punctuation">,</span> currentDate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    field<span class="token punctuation">.</span><span class="token function">setAccessible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> invocation<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">plugin</span><span class="token punctuation">(</span>Object target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>target <span class="token keyword">instanceof</span> <span class="token class-name">Executor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> Plugin<span class="token punctuation">.</span><span class="token function">wrap</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> target<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setProperties</span><span class="token punctuation">(</span>Properties properties<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>大功告成</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -497,7 +561,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/">http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/</a>
+                    <a href="http://blog.cabbage329.com/2020/02/03/mybatis-audit/">http://blog.cabbage329.com/2020/02/03/mybatis-audit/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -535,12 +599,12 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
+                                <a href="/tags/mybatis/">
+                                    <span class="chip bg-color">mybatis</span>
                                 </a>
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -711,7 +775,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
         repo: 'bengalm.github.io',
         owner: 'bengalm',
         admin: "bengalm",
-        id: '2020-01-30T20-35-02',
+        id: '2020-02-03T18-48-35',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -732,9 +796,10 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/02/03/mybatis-audit/">
                     <div class="card-image">
@@ -752,9 +817,9 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -767,6 +832,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -789,31 +855,31 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/29/nginx-custom-error-response/">
+                <a href="/2020/01/30/docker-deploy-springboot/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="nginx自定义错误返回">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="springboot程序部署到docker">
                         
-                        <span class="card-title">nginx自定义错误返回</span>
+                        <span class="card-title">springboot程序部署到docker</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            nginx自定义错误返回
+                            springboot程序部署到docker
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/nginx/" class="post-category">
-                                    nginx
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
                                 </a>
                             
                             
@@ -823,8 +889,12 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]<
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/springboot/">
+                        <span class="chip bg-color">springboot</span>
                     </a>
                     
                 </div>
