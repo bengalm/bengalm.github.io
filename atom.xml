@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-02-03T11:01:36.000Z</updated>
+  <updated>2020-03-05T12:03:26.985Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>zuul集成shiro jwt Authorization丢失问题</title>
+    <link href="http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/"/>
+    <id>http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/</id>
+    <published>2020-03-05T11:50:17.000Z</published>
+    <updated>2020-03-05T12:03:26.985Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Google了下 zuul header authorization&lt;br&gt;找到解决方法&lt;/p&gt;
+&lt;pre class=&quot; language-properties&quot;&gt;&lt;code class=&quot;language-properties&quot;&gt;&lt;span class=&quot;token
+        
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://blog.cabbage329.com/categories/java/"/>
+    
+    
+      <category term="zuul" scheme="http://blog.cabbage329.com/tags/zuul/"/>
+    
+  </entry>
   
   <entry>
     <title>mybatis audit</title>
@@ -51,7 +79,7 @@
     <link href="http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/"/>
     <id>http://blog.cabbage329.com/2020/01/30/docker-deploy-springboot/</id>
     <published>2020-01-30T12:35:02.000Z</published>
-    <updated>2020-01-30T12:38:16.396Z</updated>
+    <updated>2020-02-03T11:25:52.000Z</updated>
     
     <summary type="html">
     
@@ -59,7 +87,7 @@
       
         
         
-          &lt;h2 id=&quot;1-docker开启远程访问接口&quot;&gt;&lt;a href=&quot;#1-docker开启远程访问接口&quot; class=&quot;headerlink&quot;
+          &lt;h2 id=&quot;1-docker开启远程访问接口&quot;&gt;&lt;a href=&quot;#1-docker开启远程访问接口&quot; class=&quot;headerlink&quot; title=&quot;1.docker开启远程访问接口&quot;&gt;&lt;/a&gt;1.docker开启远程访问接口&lt;/h2&gt;&lt;h3
         
       
     
@@ -108,7 +136,7 @@
     <link href="http://blog.cabbage329.com/2020/01/29/task-java-cancel/"/>
     <id>http://blog.cabbage329.com/2020/01/29/task-java-cancel/</id>
     <published>2020-01-29T05:22:23.000Z</published>
-    <updated>2020-01-29T06:34:25.693Z</updated>
+    <updated>2020-02-03T11:28:16.000Z</updated>
     
     <summary type="html">
     
@@ -128,6 +156,8 @@
     
       <category term="theardPool" scheme="http://blog.cabbage329.com/tags/theardPool/"/>
     
+      <category term="java" scheme="http://blog.cabbage329.com/tags/java/"/>
+    
   </entry>
   
   <entry>
@@ -135,7 +165,7 @@
     <link href="http://blog.cabbage329.com/2020/01/27/a/"/>
     <id>http://blog.cabbage329.com/2020/01/27/a/</id>
     <published>2020-01-27T07:54:19.000Z</published>
-    <updated>2020-01-29T06:34:04.907Z</updated>
+    <updated>2020-02-03T11:29:18.000Z</updated>
     
     <summary type="html">
     
@@ -157,6 +187,8 @@
       <category term="apns" scheme="http://blog.cabbage329.com/tags/apns/"/>
     
       <category term="certificate" scheme="http://blog.cabbage329.com/tags/certificate/"/>
+    
+      <category term="java" scheme="http://blog.cabbage329.com/tags/java/"/>
     
   </entry>
   

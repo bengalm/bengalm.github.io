@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>zuul集成shiro jwt Authorization丢失问题</title>
+      <link href="/2020/03/05/zuul-shiro-jwt-authorization/"/>
+      <url>/2020/03/05/zuul-shiro-jwt-authorization/</url>
+      
+        <content type="html"><![CDATA[<p>Google了下 zuul header authorization<br>找到解决方法</p><pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># Pass Authorization header downstream</span><span class="token attr-name">zuul.sensitiveHeaders</span><span class="token punctuation">:</span> <span class="token attr-value">Cookie,Set-Cookie</span></code></pre><p>done!</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> zuul </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>mybatis audit</title>
       <link href="/2020/02/03/mybatis-audit/"/>
       <url>/2020/02/03/mybatis-audit/</url>
@@ -35,7 +60,7 @@
       <link href="/2020/01/30/docker-deploy-springboot/"/>
       <url>/2020/01/30/docker-deploy-springboot/</url>
       
-        <content type="html"><![CDATA[<h2 id="1-docker开启远程访问接口"><a href="#1-docker开启远程访问接口" class="headerlink" title="1.docker开启远程访问接口"></a>1.docker开启远程访问接口</h2><ol><li>在<code>/etc/docker</code>创建 <code>daemon.json</code> 文件:<pre><code>{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}</code></pre></li><li>重启docker:<pre><code>systemctl restart docker        </code></pre></li></ol><h2 id="2-Spring-Boot-项目添加Docker支持"><a href="#2-Spring-Boot-项目添加Docker支持" class="headerlink" title="2.Spring Boot 项目添加Docker支持"></a>2.Spring Boot 项目添加Docker支持</h2><ol><li>在<code>/src/main/docker</code>创建<code>Dockerfile</code>文件:<pre><code>FROM openjdk:8-jdk-alpineVOLUME /tmpADD demo-0.0.1-SNAPSHOT.jar app.jarENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</code></pre>这个 Dockerfile 文件很简单，构建 Jdk 基础环境，添加 Spring Boot Jar 到镜像中，简单解释一下:<ul><li>FROM ，表示使用 Jdk8 环境 为基础镜像，如果镜像不是本地的会从 DockerHub 进行下载</li><li>VOLUME ，VOLUME 指向了一个/tmp的目录，由于 Spring Boot 使用内置的Tomcat容器，Tomcat 默认使用/tmp作为工作目录。这个命令的效果是：在宿主机的/var/lib/docker目录下创建一个临时文件并把它链接到容器中的/tmp目录</li><li>ADD ，拷贝文件并且重命名</li><li>ENTRYPOINT ，为了缩短 Tomcat 的启动时间，添加java.security.egd的系统属性指向/dev/urandom作为 ENTRYPOINT</li></ul></li><li>修改pom.xml<br>在 pom.xml 中添加 Docker 镜像名称<pre><code>&lt;properties&gt;     &lt;docker.image.prefix&gt;springboot&lt;/docker.image.prefix&gt;&lt;/properties&gt;</code></pre>plugins 中添加 Docker 构建插件<pre><code>&lt;plugin&gt; &lt;groupId&gt;com.spotify&lt;/groupId&gt; &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;configuration&gt;     &lt;imageName&gt;${docker.image.prefix}/${project.artifactId}&lt;/imageName&gt;     &lt;dockerDirectory&gt;src/main/docker&lt;/dockerDirectory&gt;     &lt;dockerHost&gt;http://172.30.48.188:2375&lt;/dockerHost&gt;     &lt;resources&gt;         &lt;resource&gt;             &lt;targetPath&gt;/&lt;/targetPath&gt;             &lt;directory&gt;${project.build.directory}&lt;/directory&gt;             &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;         &lt;/resource&gt;     &lt;/resources&gt; &lt;/configuration&gt;&lt;/plugin&gt;</code></pre></li></ol><h2 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h2><ol><li>打包jar<br><img src="https://i.loli.net/2020/01/30/zW9JGbXCf4MDQ52.png" alt="2020-01-30_201542.png"></li><li>docker部署<br><img src="https://i.loli.net/2020/01/30/y4daQKMhSjVwmpF.png" alt="2020-01-30_201627.png"><br><img src="https://i.loli.net/2020/01/30/Jj1Apv92uGTwnOb.png" alt="2020-01-30_201727.png"></li><li>查看docker image<br><img src="https://i.loli.net/2020/01/30/OsXEUuKVYP36dqb.png" alt="2020-01-30_201705.png"></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+        <content type="html"><![CDATA[<h2 id="1-docker开启远程访问接口"><a href="#1-docker开启远程访问接口" class="headerlink" title="1.docker开启远程访问接口"></a>1.docker开启远程访问接口</h2><h3 id="1-在-etc-docker创建-daemon-json-文件"><a href="#1-在-etc-docker创建-daemon-json-文件" class="headerlink" title="1. 在/etc/docker创建 daemon.json 文件:"></a>1. 在<code>/etc/docker</code>创建 <code>daemon.json</code> 文件:</h3><pre><code>{"hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"]}</code></pre><h3 id="2-重启docker"><a href="#2-重启docker" class="headerlink" title="2. 重启docker:"></a>2. 重启docker:</h3><pre><code>systemctl restart docker        </code></pre><h2 id="2-Spring-Boot-项目添加Docker支持"><a href="#2-Spring-Boot-项目添加Docker支持" class="headerlink" title="2.Spring Boot 项目添加Docker支持"></a>2.Spring Boot 项目添加Docker支持</h2><h3 id="1-在-src-main-docker创建Dockerfile文件"><a href="#1-在-src-main-docker创建Dockerfile文件" class="headerlink" title="1. 在/src/main/docker创建Dockerfile文件:"></a>1. 在<code>/src/main/docker</code>创建<code>Dockerfile</code>文件:</h3><pre><code>FROM openjdk:8-jdk-alpineVOLUME /tmpADD demo-0.0.1-SNAPSHOT.jar app.jarENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]</code></pre><p>这个 Dockerfile 文件很简单，构建 Jdk 基础环境，添加 Spring Boot Jar 到镜像中，简单解释一下:<br>    - FROM ，表示使用 Jdk8 环境 为基础镜像，如果镜像不是本地的会从 DockerHub 进行下载<br>    - VOLUME ，VOLUME 指向了一个/tmp的目录，由于 Spring Boot 使用内置的Tomcat容器，Tomcat 默认使用/tmp作为工作目录。这个命令的效果是：在宿主机的/var/lib/docker目录下创建一个临时文件并把它链接到容器中的/tmp目录<br>    - ADD ，拷贝文件并且重命名<br>    - ENTRYPOINT ，为了缩短 Tomcat 的启动时间，添加java.security.egd的系统属性指向/dev/urandom作为 ENTRYPOINT</p><h3 id="2-修改pom-xml"><a href="#2-修改pom-xml" class="headerlink" title="2. 修改pom.xml"></a>2. 修改pom.xml</h3><p>  在 pom.xml 中添加 Docker 镜像名称</p><pre><code>&lt;properties&gt;        &lt;docker.image.prefix&gt;springboot&lt;/docker.image.prefix&gt;&lt;/properties&gt;</code></pre><p>  plugins 中添加 Docker 构建插件</p><pre><code>&lt;plugin&gt;    &lt;groupId&gt;com.spotify&lt;/groupId&gt;    &lt;artifactId&gt;docker-maven-plugin&lt;/artifactId&gt;    &lt;version&gt;1.0.0&lt;/version&gt;    &lt;configuration&gt;        &lt;imageName&gt;${docker.image.prefix}/${project.artifactId}&lt;/imageName&gt;        &lt;dockerDirectory&gt;src/main/docker&lt;/dockerDirectory&gt;        &lt;dockerHost&gt;http://172.30.48.188:2375&lt;/dockerHost&gt;        &lt;resources&gt;            &lt;resource&gt;                &lt;targetPath&gt;/&lt;/targetPath&gt;                &lt;directory&gt;${project.build.directory}&lt;/directory&gt;                &lt;include&gt;${project.build.finalName}.jar&lt;/include&gt;            &lt;/resource&gt;        &lt;/resources&gt;    &lt;/configuration&gt;&lt;/plugin&gt;</code></pre><h2 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h2><h3 id="1-打包jar"><a href="#1-打包jar" class="headerlink" title="1. 打包jar"></a>1. 打包jar</h3><p><img src="https://i.loli.net/2020/01/30/zW9JGbXCf4MDQ52.png" alt="2020-01-30_201542.png"></p><h3 id="2-docker部署"><a href="#2-docker部署" class="headerlink" title="2. docker部署"></a>2. docker部署</h3><p><img src="https://i.loli.net/2020/01/30/y4daQKMhSjVwmpF.png" alt="2020-01-30_201627.png"><br><img src="https://i.loli.net/2020/01/30/Jj1Apv92uGTwnOb.png" alt="2020-01-30_201727.png"></p><h3 id="3-查看docker-image"><a href="#3-查看docker-image" class="headerlink" title="3. 查看docker image"></a>3. 查看docker image</h3><p><img src="https://i.loli.net/2020/01/30/OsXEUuKVYP36dqb.png" alt="2020-01-30_201705.png"></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
       <categories>
@@ -101,6 +126,8 @@
             
             <tag> theardPool </tag>
             
+            <tag> java </tag>
+            
         </tags>
       
     </entry>
@@ -127,6 +154,8 @@
             <tag> apns </tag>
             
             <tag> certificate </tag>
+            
+            <tag> java </tag>
             
         </tags>
       

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx自定义错误返回, cabbage">
-    <meta name="description" content="nginx自定义错误返回">
+    <meta name="keywords" content="zuul集成shiro jwt Authorization丢失问题, cabbage">
+    <meta name="description" content="zuul集成shiro jwt Authorization丢失问题">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx自定义错误返回 | cabbage</title>
+    <title>zuul集成shiro jwt Authorization丢失问题 | cabbage</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,12 +241,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">nginx自定义错误返回</h1>
+                    <h1 class="description center-align post-title">zuul集成shiro jwt Authorization丢失问题</h1>
                 </div>
             </div>
         </div>
@@ -363,8 +363,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/zuul/">
+                                <span class="chip bg-color">zuul</span>
                             </a>
                         
                     </div>
@@ -375,8 +375,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/nginx/" class="post-category">
-                                nginx
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
                     </div>
@@ -388,7 +388,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-01-29
+                    2020-03-05
                 </div>
                 
 
@@ -410,14 +410,10 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>nginx 错误页面我想返回json数据</p>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="添加错误状态码处理"><a href="#添加错误状态码处理" class="headerlink" title="添加错误状态码处理"></a>添加错误状态码处理</h3><pre><code>error_page 404 =200 @404_json;</code></pre><p>404 处理的错误状态码</p>
-<p>=200 修改返回状态码</p>
-<p>@404_json 对应的处理</p>
-<h3 id="添加对应处理"><a href="#添加对应处理" class="headerlink" title="添加对应处理"></a>添加对应处理</h3><pre><code>location @404_json {
-    default_type application/json;
-    return 404 '{ "response": { "status": "EXCEPTION_404_NOT_FOUND",}, "message": "Not Found"}';
-}</code></pre><p>return 404 xxx (这个404 修改不起作用需要修改返回状态码看上一步)</p>
+                <p>Google了下 zuul header authorization<br>找到解决方法</p>
+<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># Pass Authorization header downstream</span>
+<span class="token attr-name">zuul.sensitiveHeaders</span><span class="token punctuation">:</span> <span class="token attr-value">Cookie,Set-Cookie</span></code></pre>
+<p>done!</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -461,7 +457,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.cabbage329.com/2020/01/29/nginx-custom-error-response/">http://blog.cabbage329.com/2020/01/29/nginx-custom-error-response/</a>
+                    <a href="http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/">http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -499,8 +495,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/nginx/">
-                                    <span class="chip bg-color">nginx</span>
+                                <a href="/tags/zuul/">
+                                    <span class="chip bg-color">zuul</span>
                                 </a>
                             
                         </div>
@@ -671,7 +667,7 @@
         repo: 'bengalm.github.io',
         owner: 'bengalm',
         admin: "bengalm",
-        id: '2020-01-29T19-12-17',
+        id: '2020-03-05T19-50-17',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -692,50 +688,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/01/30/docker-deploy-springboot/">
+                <a href="/2020/03/05/zuul-shiro-jwt-authorization/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="springboot程序部署到docker">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="zuul集成shiro jwt Authorization丢失问题">
                         
-                        <span class="card-title">springboot程序部署到docker</span>
+                        <span class="card-title">zuul集成shiro jwt Authorization丢失问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            springboot程序部署到docker
+                            zuul集成shiro jwt Authorization丢失问题
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-01-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/docker/" class="post-category">
-                                    docker
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
-                    </a>
-                    
-                    <a href="/tags/springboot/">
-                        <span class="chip bg-color">springboot</span>
+                    <a href="/tags/zuul/">
+                        <span class="chip bg-color">zuul</span>
                     </a>
                     
                 </div>
@@ -749,24 +743,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/01/29/task-java-cancel/">
+                <a href="/2020/02/03/mybatis-audit/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="java线程池取消指定任务">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="mybatis audit">
                         
-                        <span class="card-title">java线程池取消指定任务</span>
+                        <span class="card-title">mybatis audit</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            java线程池取消指定任务
+                            mybatis审计功能实现
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-01-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-03
                             </span>
                         <span class="publish-author">
                             
@@ -783,8 +777,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/theardPool/">
-                        <span class="chip bg-color">theardPool</span>
+                    <a href="/tags/mybatis/">
+                        <span class="chip bg-color">mybatis</span>
                     </a>
                     
                     <a href="/tags/java/">
