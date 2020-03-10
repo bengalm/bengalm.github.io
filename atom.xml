@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.cabbage329.com/"/>
-  <updated>2020-03-05T12:03:26.985Z</updated>
+  <updated>2020-03-10T01:56:54.018Z</updated>
   <id>http://blog.cabbage329.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>virtualBox 调整centos驱动器大小</title>
+    <link href="http://blog.cabbage329.com/2020/03/10/virtualbox-centos/"/>
+    <id>http://blog.cabbage329.com/2020/03/10/virtualbox-centos/</id>
+    <published>2020-03-10T01:54:19.000Z</published>
+    <updated>2020-03-10T01:56:54.018Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;修改vdi大小&quot;&gt;&lt;a href=&quot;#修改vdi大小&quot; class=&quot;headerlink&quot; title=&quot;修改vdi大小&quot;&gt;&lt;/a&gt;修改vdi大小&lt;/h1&gt;&lt;h2 id=&quot;1-查看vdi信息&quot;&gt;&lt;a href=&quot;#1-查看vdi信息&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="virualbox" scheme="http://blog.cabbage329.com/categories/virualbox/"/>
+    
+    
+      <category term="centos" scheme="http://blog.cabbage329.com/tags/centos/"/>
+    
+      <category term="virtualbox" scheme="http://blog.cabbage329.com/tags/virtualbox/"/>
+    
+  </entry>
   
   <entry>
     <title>zuul集成shiro jwt Authorization丢失问题</title>

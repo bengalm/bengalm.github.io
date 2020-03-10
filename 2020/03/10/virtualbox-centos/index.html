@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="zuul集成shiro jwt Authorization丢失问题, cabbage">
-    <meta name="description" content="zuul集成shiro jwt Authorization丢失问题">
+    <meta name="keywords" content="virtualBox 调整centos驱动器大小, cabbage">
+    <meta name="description" content="virualbox">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>zuul集成shiro jwt Authorization丢失问题 | cabbage</title>
+    <title>virtualBox 调整centos驱动器大小 | cabbage</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -241,12 +241,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">zuul集成shiro jwt Authorization丢失问题</h1>
+                    <h1 class="description center-align post-title">virtualBox 调整centos驱动器大小</h1>
                 </div>
             </div>
         </div>
@@ -363,8 +363,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/zuul/">
-                                <span class="chip bg-color">zuul</span>
+                            <a href="/tags/centos/">
+                                <span class="chip bg-color">centos</span>
+                            </a>
+                        
+                            <a href="/tags/virtualbox/">
+                                <span class="chip bg-color">virtualbox</span>
                             </a>
                         
                     </div>
@@ -375,8 +379,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/java/" class="post-category">
-                                java
+                            <a href="/categories/virualbox/" class="post-category">
+                                virualbox
                             </a>
                         
                     </div>
@@ -388,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-05
+                    2020-03-10
                 </div>
                 
 
@@ -410,10 +414,9 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Google了下 zuul header authorization<br>找到解决方法</p>
-<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># Pass Authorization header downstream</span>
-<span class="token attr-name">zuul.sensitiveHeaders</span><span class="token punctuation">:</span> <span class="token attr-value">Cookie,Set-Cookie</span></code></pre>
-<p>done!</p>
+                <h1 id="修改vdi大小"><a href="#修改vdi大小" class="headerlink" title="修改vdi大小"></a>修改vdi大小</h1><h2 id="1-查看vdi信息"><a href="#1-查看vdi信息" class="headerlink" title="1.查看vdi信息"></a>1.查看vdi信息</h2><pre><code>VboxManage.exe showhdinfo "xxx.vdi"</code></pre><h2 id="2-修改vdi大小"><a href="#2-修改vdi大小" class="headerlink" title="2.修改vdi大小"></a>2.修改vdi大小</h2><pre><code>VboxManage.exe modifymedium "xxx.vdi" --resizebyte 21474836480 (20G 1024*1024*1024*20)</code></pre><h1 id="扩展centos分区"><a href="#扩展centos分区" class="headerlink" title="扩展centos分区"></a>扩展centos分区</h1><h2 id="1-检查当前分区的大小并获取名称"><a href="#1-检查当前分区的大小并获取名称" class="headerlink" title="1.检查当前分区的大小并获取名称"></a>1.检查当前分区的大小并获取名称</h2><p>名称VG Name</p>
+<pre><code>vgdisplay -v</code></pre><p>我的是/dev/centos/root</p>
+<h2 id="2-使用可用空间扩展卷"><a href="#2-使用可用空间扩展卷" class="headerlink" title="2.使用可用空间扩展卷"></a>2.使用可用空间扩展卷</h2><pre><code>lvextend -l +100%FREE /dev/centos/root</code></pre><h2 id="3-调整大小"><a href="#3-调整大小" class="headerlink" title="3.调整大小"></a>3.调整大小</h2><pre><code>xfs_growfs /dev/centos/root</code></pre><p>注意centos上必须使用xfs_growfs,其他linux的发行版可以使用resize2fs<br>希望对你有所帮助！</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -457,7 +460,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/">http://blog.cabbage329.com/2020/03/05/zuul-shiro-jwt-authorization/</a>
+                    <a href="http://blog.cabbage329.com/2020/03/10/virtualbox-centos/">http://blog.cabbage329.com/2020/03/10/virtualbox-centos/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -495,8 +498,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/zuul/">
-                                    <span class="chip bg-color">zuul</span>
+                                <a href="/tags/centos/">
+                                    <span class="chip bg-color">centos</span>
+                                </a>
+                            
+                                <a href="/tags/virtualbox/">
+                                    <span class="chip bg-color">virtualbox</span>
                                 </a>
                             
                         </div>
@@ -667,7 +674,7 @@
         repo: 'bengalm.github.io',
         owner: 'bengalm',
         admin: "bengalm",
-        id: '2020-03-05T19-50-17',
+        id: '2020-03-10T09-54-19',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -688,9 +695,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/03/10/virtualbox-centos/">
                     <div class="card-image">
@@ -708,9 +716,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -723,6 +731,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -745,24 +754,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/03/mybatis-audit/">
+                <a href="/2020/03/05/zuul-shiro-jwt-authorization/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="mybatis audit">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="zuul集成shiro jwt Authorization丢失问题">
                         
-                        <span class="card-title">mybatis audit</span>
+                        <span class="card-title">zuul集成shiro jwt Authorization丢失问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            mybatis审计功能实现
+                            zuul集成shiro jwt Authorization丢失问题
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-05
                             </span>
                         <span class="publish-author">
                             
@@ -779,12 +788,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/mybatis/">
-                        <span class="chip bg-color">mybatis</span>
-                    </a>
-                    
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/zuul/">
+                        <span class="chip bg-color">zuul</span>
                     </a>
                     
                 </div>
